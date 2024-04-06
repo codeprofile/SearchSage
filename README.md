@@ -16,6 +16,8 @@ SearchSage is a web application designed to enhance your search experience by pr
 
 1. **Demographic Information Input**: 
    - Enter your age, profession, gender, education level, and location into the provided form.
+     
+   - ![image](https://github.com/codeprofile/SearchSage/assets/94001814/ace88490-126d-4587-aa0d-dd8c8ee02bf3)
 
 2. **Search Query Submission**:
    - Input your search query and select the desired search engine (e.g., Google, Bing).
@@ -31,6 +33,9 @@ SearchSage is a web application designed to enhance your search experience by pr
 
 6. **User Interface Display**:
    - Search results and their summaries are displayed as interactive cards, allowing you to compare the original and summarized content easily.
+  
+   - ![image](https://github.com/codeprofile/SearchSage/assets/94001814/e7693b4d-9e64-4ba1-8b67-36a606ca9742)
+
 
 7. **Continuous Improvement**:
    - SearchSage can be further enhanced with user feedback and iterative development cycles, incorporating additional features, optimizations, and improvements based on user needs and preferences.
