@@ -12,7 +12,7 @@ SearchSage is a web application designed to enhance your search experience by pr
 
 - **Transparent Demographic Tailoring**: Demographic details are prominently displayed at the top of the page, providing transparency about how the search results were personalized to your profile.
 
-![image](https://github.com/codeprofile/SearchSage/assets/76622803/7014e88d-8c2e-4737-9a7e-64193db1060e)
+- ![image](https://github.com/codeprofile/SearchSage/assets/76622803/7014e88d-8c2e-4737-9a7e-64193db1060e)
 
 
 ## How It Works
