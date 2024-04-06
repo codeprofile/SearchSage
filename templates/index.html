@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .result-card {
+            width: 45%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            background-color: #fff;
+            transition: box-shadow 0.3s ease;
+        }
+        .result-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .result-card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .paragraph {
+            color: #555;
+            margin-bottom: 10px;
+            max-height: 100px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .read-more {
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .read-more:hover {
+            color: #0056b3;
+        }
+        .reference-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .reference-link a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .reference-link a:hover {
+            color: #333;
+        }
+        .paragraph p {
+            margin: 0 0 10px;
+        }
+        .tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #888;
+        }
+    </style>
+    <script>
+        function handleImageError(image) {
+            image.onerror = "";
+            image.src = "static/defaultimage.jpg";
+            return true;
+        }
+        function toggleParagraph(cardId) {
+            var paragraph = document.getElementById(cardId + "-paragraph");
+            var readMoreLink = document.getElementById(cardId + "-read-more");
+
+            if (paragraph.style.maxHeight) {
+                paragraph.style.maxHeight = null;
+                readMoreLink.innerText = "Read more";
+            } else {
+                paragraph.style.maxHeight = paragraph.scrollHeight + "px";
+                readMoreLink.innerText = "Read less";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        Google Top 10 Search Results
+    </header>
+    <div class="container">
+        <div class="demographic-details">
+            <div class="demographic-details-container">
+    <h2 class="demographic-details-heading">Demographic Details</h2>
+    <div class="demographic-details">
+        <!-- Display demographic details using icons and engaging text -->
+        <i class="fas fa-user"></i> Age: {{ demographic_details.person_age }} years
+        <i class="fas fa-briefcase"></i> Profession: {{ demographic_details.person_profession }}
+        <i class="fas fa-map-marker-alt"></i> Location: {{ demographic_details.person_location }}
+        <i class="fas fa-graduation-cap"></i> Education: {{ demographic_details.education_level }} degree
+    </div>
+</div>
+        </div>
+        {% for cards in result_cards %}
+            <div class="result-container">
+                <div class="result-card" id="card{{ loop.index }}">
+                    <div class="tag">Original</div>
+                    <h2 class="title">{{ cards.original_card.title }}</h2>
+                    <img src="{{ cards.original_card.image }}" alt="Result Image" onerror="handleImageError(this);">
+                    <div class="paragraph" id="card{{ loop.index }}-paragraph">
+                        {% for paragraph in cards.original_card.paragraphs %}
+                            <p>{{ paragraph }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="read-more" id="card{{ loop.index }}-read-more" onclick="toggleParagraph('card{{ loop.index }}')">Read more</div>
+                    <div class="reference-link">
+                        <a href="{{ cards.original_card.link }}" target="_blank">Reference link <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="result-card" id="card{{ loop.index }}-summarised">
+                    <div class="tag">Summarised</div>
+                    <h2 class="title">{{ cards.summarised_card.title }}</h2>
+                    <img src="{{ cards.original_card.image }}" alt="Result Image" onerror="handleImageError(this);">
+                    <div class="paragraph" id="card{{ loop.index }}-summarised-paragraph">
+                        <p>{{ cards.summarised_card.summarised_content }}</p>
+                    </div>
+                    <div class="read-more" id="card{{ loop.index }}-summarised-read-more" onclick="toggleParagraph('card{{ loop.index }}-summarised')">Read more</div>
+                    <div class="reference-link">
+                        <a href="{{ cards.original_card.link }}" target="_blank">Reference link <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <footer>
+        &copy; 2024 Google Top 10 Search Results
+    </footer>
+</body>
+</html>
