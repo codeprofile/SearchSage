@@ -29,7 +29,7 @@
             margin-bottom: 10px;
             font-weight: bold;
         }
-        input[type="text"], input[type="number"] {
+        input[type="text"], input[type="number"], select {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -62,6 +62,24 @@
 
             <label for="profession">Profession:</label>
             <input type="text" id="profession" name="profession" required>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="education">Education Level:</label>
+            <select id="education" name="education" required>
+                <option value="highschool">High School</option>
+                <option value="bachelor">Bachelor's Degree</option>
+                <option value="master">Master's Degree</option>
+                <option value="phd">Ph.D.</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
 
             <label for="query">Search Query:</label>
             <input type="text" id="query" name="query" required>

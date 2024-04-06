@@ -10,7 +10,11 @@
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
+<<<<<<< HEAD
             padding: 0;
+=======
+            padding: 20px;
+>>>>>>> fd87fdacee7d147cf6b698aa71a96955322f8fe2
         }
         header {
             background-color: #0056b3;
@@ -18,26 +22,49 @@
             padding: 10px;
             text-align: center;
             font-size: 1.5rem;
+<<<<<<< HEAD
+=======
+            margin-bottom: 20px;
+>>>>>>> fd87fdacee7d147cf6b698aa71a96955322f8fe2
         }
         footer {
             background-color: #0056b3;
             color: white;
             padding: 10px;
             text-align: center;
+<<<<<<< HEAD
+=======
+            font-size: 0.8rem;
+>>>>>>> fd87fdacee7d147cf6b698aa71a96955322f8fe2
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
+<<<<<<< HEAD
             font-size: 0.8rem;
+=======
+>>>>>>> fd87fdacee7d147cf6b698aa71a96955322f8fe2
         }
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+<<<<<<< HEAD
             margin-top: 20px;
         }
         .result-card {
             width: 300px;
+=======
+        }
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .result-card {
+            width: 45%;
+>>>>>>> fd87fdacee7d147cf6b698aa71a96955322f8fe2
             border: 1px solid #ccc;
             border-radius: 8px;
             padding: 20px;
@@ -91,6 +118,15 @@
         .paragraph p {
             margin: 0 0 10px;
         }
+<<<<<<< HEAD
+=======
+        .tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #888;
+        }
+>>>>>>> fd87fdacee7d147cf6b698aa71a96955322f8fe2
     </style>
     <script>
         function handleImageError(image) {
@@ -117,22 +153,45 @@
         Google Top 10 Search Results
     </header>
     <div class="container">
-        {% for card in result_cards %}
-            <div class="result-card" id="card{{ loop.index }}">
-                {% if card.image %}
-                    <img src="{{ card.image }}" alt="Result Image" onerror="handleImageError(this);">
-                {% else %}
-                    <img src="static/defaultimage.jpg" alt="Default Image">
-                {% endif %}
-                <h2 class="title">{{ card.title }}</h2>
-                <div class="paragraph" id="card{{ loop.index }}-paragraph">
-                    {% for paragraph in card.paragraphs %}
-                        <p>{{ paragraph }}</p>
-                    {% endfor %}
+        <div class="demographic-details">
+            <div class="demographic-details-container">
+    <h2 class="demographic-details-heading">Demographic Details</h2>
+    <div class="demographic-details">
+        <!-- Display demographic details using icons and engaging text -->
+        <i class="fas fa-user"></i> Age: {{ demographic_details.person_age }} years
+        <i class="fas fa-briefcase"></i> Profession: {{ demographic_details.person_profession }}
+        <i class="fas fa-map-marker-alt"></i> Location: {{ demographic_details.person_location }}
+        <i class="fas fa-graduation-cap"></i> Education: {{ demographic_details.education_level }} degree
+    </div>
+</div>
+        </div>
+        {% for cards in result_cards %}
+            <div class="result-container">
+                <div class="result-card" id="card{{ loop.index }}">
+                    <div class="tag">Original</div>
+                    <h2 class="title">{{ cards.original_card.title }}</h2>
+                    <img src="{{ cards.original_card.image }}" alt="Result Image" onerror="handleImageError(this);">
+                    <div class="paragraph" id="card{{ loop.index }}-paragraph">
+                        {% for paragraph in cards.original_card.paragraphs %}
+                            <p>{{ paragraph }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="read-more" id="card{{ loop.index }}-read-more" onclick="toggleParagraph('card{{ loop.index }}')">Read more</div>
+                    <div class="reference-link">
+                        <a href="{{ cards.original_card.link }}" target="_blank">Reference link <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
-                <div class="read-more" id="card{{ loop.index }}-read-more" onclick="toggleParagraph('card{{ loop.index }}')">Read more</div>
-                <div class="reference-link">
-                    <a href="{{ card.link }}" target="_blank">Reference link <i class="fas fa-external-link-alt"></i></a>
+                <div class="result-card" id="card{{ loop.index }}-summarised">
+                    <div class="tag">Summarised</div>
+                    <h2 class="title">{{ cards.summarised_card.title }}</h2>
+                    <img src="{{ cards.original_card.image }}" alt="Result Image" onerror="handleImageError(this);">
+                    <div class="paragraph" id="card{{ loop.index }}-summarised-paragraph">
+                        <p>{{ cards.summarised_card.summarised_content }}</p>
+                    </div>
+                    <div class="read-more" id="card{{ loop.index }}-summarised-read-more" onclick="toggleParagraph('card{{ loop.index }}-summarised')">Read more</div>
+                    <div class="reference-link">
+                        <a href="{{ cards.original_card.link }}" target="_blank">Reference link <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
